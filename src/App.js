@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import Header from "./components/Header";
+import Posts from './components/Posts';
+import Post from './components/Post';
+import './App.css'
 
-function App() {
+const App = () => {
+  const message = "Hello from "
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className="App">
+        <Router>
+          <Header message={message} />
+          <Routes>
+            <Route path='/' element={<Navigate replace to='/posts' />} />
+            <Route path='/posts' element={<Posts message={message} />} />
+            <Route path='/posts/:postId' element={<Post message={message} />} />
+          </Routes>
+        </Router>
+      </div>
+  )
 }
 
 export default App;
